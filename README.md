@@ -14,7 +14,7 @@ Papers for 3D Detection
 该方法的一些检测思路主要着基于相机的几何思维，关键的车辆3D bounding box的设计并没有在论文里准确的说清楚，大致应该是如下设计的初始框，与相机
 坐标一致。
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/1.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/1.png)
 
 剩下的几个点：
 
@@ -22,12 +22,12 @@ Papers for 3D Detection
 根据论文里描述：虽然随着本车与其他物体逐渐靠近，由于相机的成像原理，在图像中物体的行驶方向好像一直在变化，但实际上是没有发生变化的，通过单一回归
 文章中设置的  来得到最终的检测物体方向。具体就是  
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/2.png) ![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/3.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/2.png) ![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/3.png)
 
 ##### 2).Multi-bin
 基本也是依据RPN的类似思想，把anchor换成角度值，通过输出给定角度值的概率确定大体角度，网络再另回归出角度的offset以补偿角度的不准确性。另一个输出就是box的offset，因为这里论文中也事先对不同类别的物体尺寸做了一个近似值，通过不同类别先确定一个大概尺寸，之后再通过offset补足检测的不准确性。
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/4.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/4.png)
 
 ##### 3).没有回归计算检测目标的平移量
 论文里只是回归出了目标的三维尺度，没有对物体位置平移量做回归，文章说这样回归计算十分耗时且精度下降。
@@ -44,13 +44,13 @@ we carried out experiments on regressing alternative parameters related to trans
 
 网络结构：
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/5.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/5.png)
 
 几个关键点：
 ##### 1).体素格的建立
 这里主要是建立一个W,H,D 大小的空间，然后将空间均匀划分为等尺寸的3D 格子，将该格子投影到相机成像平面，并通过多尺度的平面特征提取，以此来获取体素格的特征值，文章里的把3D 盒投影近似看作一个矩形。
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/6.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/6.png)
 
 在获得了3D 空间特征后，利用top down network 将其投影至鸟瞰平面，这里的用的网络结构是resnet-16.
 The orthographic feature map is obtained by summing voxel features along the vertical
@@ -71,8 +71,9 @@ object detection》利用概率的大小来定位，之后再用近似的边界�
 论文地址：https://arxiv.org/abs/1903.10955 
 这篇论文主要说了一个在图像中表达3D信息具有一定的模糊性，于是该文章根据预先由设计好的网络生成的2D框以及方向先产生一个近似正确的3D框，之后对这个框在图像上投影的三个面分别进行特征学习以此来提高检测精度。
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/8.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/8.png)
 
 其他还有
 《Pseudo-LiDAR from Visual Depth Estimation: Bridging the Gap in 3D Object Detection for Autonomous Driving》 https://arxiv.org/abs/1812.07179 和《Accurate Monocular 3D Object Detection via Color-Embedded 3D Reconstruction for Autonomous Driving》 https://arxiv.org/abs/1903.11444 
+
 在https://zhuanlan.zhihu.com/p/41460767 都有讲解，就不重复造轮子了。
