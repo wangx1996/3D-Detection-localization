@@ -55,7 +55,7 @@ we carried out experiments on regressing alternative parameters related to trans
 在获得了3D 空间特征后，利用top down network 将其投影至鸟瞰平面，这里的用的网络结构是resnet-16.
 The orthographic feature map is obtained by summing voxel features along the vertical
 
-![Image text](https://github.com/WAN96/3D-Detection-localization/tree/master/image/7.png)
+![Image text](https://github.com/WAN96/3D-Detection-localization/blob/master/image/7.png)
 
 axis after multiplication with a set of learned weight matrices W(y) 2 Rn n:
 
